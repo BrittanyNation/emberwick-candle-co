@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emberwick Candle Co. — Hand-Poured Candles, Made to Make Home Feel Like Home</title>
+  <meta name="description" content="Emberwick Candle Co. is a neighborhood candle studio in Clarksville, Tennessee. Shop twelve hand-poured candles by scent family, pick a size, and choose delivery or pickup — every order confirmed with a reference number.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Emberwick Candle Co. — Hand-Poured Candles, Made to Make Home Feel Like Home">
+  <meta property="og:description" content="Twelve hand-poured candles by scent family, three sizes, delivery or pickup, and a real confirmation for every order.">
+  <meta property="og:image" content="https://brittanynation.github.io/emberwick-candle-co/og-image.png">
+  <meta property="og:url" content="https://brittanynation.github.io/emberwick-candle-co/">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">Emberwick <span>Candle Co.</span></a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="index.html" aria-current="page">Shop Candles</a>
+        <a href="cart.html">Basket &amp; Checkout</a>
+        <a href="visit.html">Visit &amp; Workshops</a>
+      </nav>
+      <button class="basket-btn" id="basketBtn" type="button" aria-label="Open your basket">Basket (0)</button>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="hero">
+      <div>
+        <h1>Slow light for <em>slow evenings,</em> poured by hand in Clarksville.</h1>
+        <p>Emberwick Candle Co. is a small neighborhood candle studio. Every candle is poured by hand in small batches — 100% soy wax, cotton wicks, and scents mixed in-house. No warehouses, no mass pours, no guessing.</p>
+        <div class="hero-cta">
+          <a class="btn btn-rose" href="#shop">Shop candles</a>
+          <a class="btn btn-ghost" href="visit.html">Visit the shop</a>
+        </div>
+      </div>
+      <img src="images/hero.jpg" alt="Handmade scented candles in glass jars, lit and glowing">
+    </div>
+
+    <div class="trust-band" aria-label="Shop promises">
+      <div class="trust-card"><strong>Poured in small batches</strong><p>Every candle is poured by hand in the shop, never mass-produced.</p></div>
+      <div class="trust-card"><strong>Same-day delivery</strong><p>Order by 2 PM for delivery today, Monday to Saturday.</p></div>
+      <div class="trust-card"><strong>Free over $60</strong><p>Delivery is free once your order reaches $60 after discounts.</p></div>
+      <div class="trust-card"><strong>Clean-burning soy wax</strong><p>No soot, no paraffin — every batch is burn-tested before it is sold.</p></div>
+    </div>
+
+    <section id="shop">
+      <div class="section-head">
+        <h2>The candle shelf</h2>
+        <p>Twelve candles, priced by size. Small is the 8 oz pour, Classic is the full 12 oz candle, Large is the 16 oz big one. Every candle lists its burn time so you know exactly what you are getting.</p>
+      </div>
+
+      <div class="toolbar">
+        <input type="search" id="searchInput" placeholder="Search candles or scents…" aria-label="Search candles">
+        <select id="sortSelect" aria-label="Sort candles">
+          <option value="featured">Sort: Featured</option>
+          <option value="price-asc">Price: low to high</option>
+          <option value="price-desc">Price: high to low</option>
+          <option value="name">Name: A to Z</option>
+        </select>
+      </div>
+      <div class="toolbar">
+        <div class="chips" id="familyChips" role="group" aria-label="Filter by scent family">
+          <button class="chip" type="button" data-family="All" aria-pressed="true">All scents</button>
+          <button class="chip" type="button" data-family="Citrus" aria-pressed="false">Citrus</button>
+          <button class="chip" type="button" data-family="Woody" aria-pressed="false">Woody</button>
+          <button class="chip" type="button" data-family="Spiced" aria-pressed="false">Spiced</button>
+          <button class="chip" type="button" data-family="Fresh" aria-pressed="false">Fresh</button>
+          <button class="chip" type="button" data-family="Gourmand" aria-pressed="false">Gourmand</button>
+          <button class="chip" type="button" data-family="Floral" aria-pressed="false">Floral</button>
+        </div>
+        <p class="result-count" id="resultCount" aria-live="polite"></p>
+      </div>
+
+      <div class="grid" id="candleGrid"></div>
+    </section>
+  </main>
+
+  <!-- Candle detail modal -->
+  <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal">
+      <img id="modalImg" src="" alt="">
+      <div class="modal-body">
+        <button class="modal-close" id="modalClose" type="button" aria-label="Close candle details">&times;</button>
+        <h3 id="modalTitle"></h3>
+        <p class="card-family" id="modalFamily"></p>
+        <p class="desc" id="modalDesc"></p>
+        <div class="size-row" id="sizeRow" role="group" aria-label="Choose a size"></div>
+        <div class="qty-row">
+          <span>Quantity</span>
+          <button type="button" id="qtyMinus" aria-label="Decrease quantity">&minus;</button>
+          <output id="qtyOut" aria-live="polite">1</output>
+          <button type="button" id="qtyPlus" aria-label="Increase quantity">+</button>
+        </div>
+        <div class="modal-total"><span>Total</span><span id="modalTotal"></span></div>
+        <button class="btn btn-rose" id="modalAddBtn" type="button">Add to basket</button>
+        <p class="modal-note">Poured in small batches with 100% soy wax and a cotton wick. Lid included.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Basket drawer -->
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+  <aside class="drawer" id="basketDrawer" aria-label="Your basket">
+    <div class="drawer-head">
+      <h2>Your basket</h2>
+      <button class="modal-close" id="drawerClose" type="button" aria-label="Close basket">&times;</button>
+    </div>
+    <div class="drawer-body" id="drawerBody"></div>
+    <div class="drawer-foot" id="drawerFoot"></div>
+  </aside>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div>
+        <strong>Emberwick Candle Co.</strong>
+        <p>318 Ember Lane, Clarksville, Tennessee</p>
+        <p>Open Monday to Saturday, 9 AM to 6 PM. Closed Sundays.</p>
+      </div>
+      <div>
+        <strong>Good to know</strong>
+        <p><a href="visit.html">Visit &amp; workshops</a> &middot; <a href="cart.html">Basket &amp; checkout</a></p>
+        <p>A fictional portfolio concept by Brittany Nation. No real orders are placed.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="shop.js"></script>
+</body>
+</html>
